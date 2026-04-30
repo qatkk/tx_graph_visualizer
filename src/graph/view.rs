@@ -13,6 +13,7 @@ pub struct TxEdgeView {
     pub from: Txid, 
     pub to: Txid, 
     pub vout: u32,
+    pub amnt: u64,
 }
 
 /// A structure to enable graph visualization 

@@ -14,7 +14,7 @@ impl TxGraphView {
         }
 
         for edge in &self.edges {
-            out.push_str(&format!("\"{}\" -> \"{}\" [label=\"{}\"];\n", edge.from, edge.to, edge.vout));
+            out.push_str(&format!("\"{}\" -> \"{}\" [label=\"vout:{}, amount: {}\"];\n", edge.from, edge.to, edge.vout, edge.amnt));
         }
 
         out.push_str("}\n");

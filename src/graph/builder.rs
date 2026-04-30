@@ -16,8 +16,17 @@ pub fn build_view(tx_graph: &TxGraph) -> TxGraphView {
             edges.push(TxEdgeView{
                 from: input.previous_output.txid,
                 to: tx_node.txid,
-                vout: input.previous_output.vout
+                vout: input.previous_output.vout,
+                amnt: if let Some(prev_tx_node) = tx_graph
+                    .get_tx_node(input.previous_output.txid){
+                        prev_tx_node.tx_out(input.previous_output.vout as usize)
+                        .unwrap()
+                        .value.to_sat()
+                    } else {
+                        0
+                    }
             });
+
         }
     }
     TxGraphView { 
