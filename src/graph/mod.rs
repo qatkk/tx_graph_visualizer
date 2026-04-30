@@ -1,5 +1,5 @@
-pub mod view;
 pub mod builder;
+pub mod view;
 
-pub use view::{TxGraphView, TxNodeView, TxEdgeView};
 pub use builder::build_view;
+pub use view::{TxEdgeView, TxGraphView, TxNodeView};
