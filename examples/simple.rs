@@ -1,11 +1,8 @@
 use bdk_wallet::KeychainKind;
+use bitcoin::{Amount, OutPoint, Transaction, TxIn, TxOut, absolute, transaction};
+use std::fs;
 use tx_graph_visualizer::graph::build_view;
 use tx_graph_visualizer::test_utils::*;
-use bitcoin::{
-    Amount, OutPoint, Transaction, TxIn, TxOut, absolute, transaction
-};
-use std::fs; 
-
 
 #[allow(clippy::print_stdout)]
 fn main() {
@@ -19,19 +16,22 @@ fn main() {
             },
             ..Default::default()
         }],
-        output: vec![TxOut {
-            value: Amount::from_sat(40_000),
-            script_pubkey: wallet
-                .next_unused_address(KeychainKind::Internal)
-                .address
-                .script_pubkey()
-        }, TxOut {
-            value: Amount::from_sat(5_000),
-            script_pubkey: wallet
-                .next_unused_address(KeychainKind::Internal)
-                .address
-                .script_pubkey()
-        }],
+        output: vec![
+            TxOut {
+                value: Amount::from_sat(40_000),
+                script_pubkey: wallet
+                    .next_unused_address(KeychainKind::Internal)
+                    .address
+                    .script_pubkey(),
+            },
+            TxOut {
+                value: Amount::from_sat(5_000),
+                script_pubkey: wallet
+                    .next_unused_address(KeychainKind::Internal)
+                    .address
+                    .script_pubkey(),
+            },
+        ],
         version: transaction::Version::ONE,
         lock_time: absolute::LockTime::ZERO,
     };
@@ -41,7 +41,7 @@ fn main() {
     let tx_spend_1 = Transaction {
         input: vec![TxIn {
             previous_output: OutPoint {
-                txid: external_txid , // not owned by wallet
+                txid: external_txid, // not owned by wallet
                 vout: 1,
             },
             ..Default::default()
@@ -51,7 +51,7 @@ fn main() {
             script_pubkey: wallet
                 .next_unused_address(KeychainKind::Internal)
                 .address
-                .script_pubkey()
+                .script_pubkey(),
         }],
         version: transaction::Version::ONE,
         lock_time: absolute::LockTime::ZERO,
