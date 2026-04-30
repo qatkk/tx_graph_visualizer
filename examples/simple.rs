@@ -4,7 +4,7 @@ use tx_graph_visualizer::test_utils::*;
 use bitcoin::{
     Amount, OutPoint, Transaction, TxIn, TxOut, Txid, absolute, hashes::Hash, transaction
 };
-use std::{fs, str::FromStr}; 
+use std::fs; 
 
 
 #[allow(clippy::print_stdout)]
