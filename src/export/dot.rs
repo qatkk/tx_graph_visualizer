@@ -10,7 +10,11 @@ impl TxGraphView {
         out.push_str("graph [bgcolor=white, fontsize=11]; \n");
 
         for node in &self.nodes {
-            out.push_str(&format!("\"{}\" [shape=box, color=lightgray, style=filled, label=\"{}...\"];\n", node.txid, &node.txid.to_string()[..8]));
+            if node.external {
+                out.push_str(&format!("\"{}\" [shape=box, color=lightred, style=filled, label=\"{}...\"];\n", node.txid, &node.txid.to_string()[..8]));
+            }else{
+                out.push_str(&format!("\"{}\" [shape=box, color=lightgray, style=filled, label=\"{}...\"];\n", node.txid, &node.txid.to_string()[..8]));
+            }
         }
 
         for edge in &self.edges {
