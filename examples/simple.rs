@@ -2,7 +2,7 @@ use bdk_wallet::KeychainKind;
 use tx_graph_visualizer::graph::build_view;
 use tx_graph_visualizer::test_utils::*;
 use bitcoin::{
-    Amount, OutPoint, Transaction, TxIn, TxOut, Txid, absolute, hashes::Hash, transaction
+    Amount, OutPoint, Transaction, TxIn, TxOut, absolute, transaction
 };
 use std::fs; 
 
@@ -10,16 +10,23 @@ use std::fs;
 #[allow(clippy::print_stdout)]
 fn main() {
     let (mut wallet, _) = get_funded_wallet_wpkh();
+    let outpoint = wallet.list_unspent().next().unwrap().outpoint;
     let external_tx = Transaction {
         input: vec![TxIn {
             previous_output: OutPoint {
-                txid: Txid::all_zeros(), // not owned by wallet
-                vout: 0,
+                txid: outpoint.txid, // not owned by wallet
+                vout: outpoint.vout,
             },
             ..Default::default()
         }],
         output: vec![TxOut {
-            value: Amount::from_sat(50_000),
+            value: Amount::from_sat(40_000),
+            script_pubkey: wallet
+                .next_unused_address(KeychainKind::External)
+                .address
+                .script_pubkey()
+        }, TxOut {
+            value: Amount::from_sat(5_000),
             script_pubkey: wallet
                 .next_unused_address(KeychainKind::External)
                 .address
@@ -35,7 +42,7 @@ fn main() {
         input: vec![TxIn {
             previous_output: OutPoint {
                 txid: external_txid , // not owned by wallet
-                vout: 0,
+                vout: 1,
             },
             ..Default::default()
         }],
@@ -61,7 +68,7 @@ fn main() {
             ..Default::default()
         }],
         output: vec![TxOut {
-            value: Amount::from_sat(45_000),
+            value: Amount::from_sat(35_000),
             script_pubkey: wallet
                 .next_unused_address(KeychainKind::Internal)
                 .address
