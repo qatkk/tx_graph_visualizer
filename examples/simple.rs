@@ -22,13 +22,13 @@ fn main() {
         output: vec![TxOut {
             value: Amount::from_sat(40_000),
             script_pubkey: wallet
-                .next_unused_address(KeychainKind::External)
+                .next_unused_address(KeychainKind::Internal)
                 .address
                 .script_pubkey()
         }, TxOut {
             value: Amount::from_sat(5_000),
             script_pubkey: wallet
-                .next_unused_address(KeychainKind::External)
+                .next_unused_address(KeychainKind::Internal)
                 .address
                 .script_pubkey()
         }],
@@ -80,6 +80,6 @@ fn main() {
 
     insert_tx(&mut wallet, tx_spend);
 
-    let tx_graph_vis = build_view(&wallet.tx_graph()).to_dot();
+    let tx_graph_vis = build_view(&wallet.tx_graph(), &wallet).to_dot();
     fs::write("graph.dot", tx_graph_vis).unwrap();
 }

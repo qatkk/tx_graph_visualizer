@@ -21,4 +21,6 @@ pub struct TxEdgeView {
 pub struct TxNodeView {
     pub txid: Txid, 
     pub is_confirmed: bool,
+    //  Transactions that we know of but don't exist in the graph
+    pub external: bool,
 }
