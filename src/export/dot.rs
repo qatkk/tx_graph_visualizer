@@ -8,7 +8,7 @@ impl TxGraphView {
 
         out.push_str("Digraph txgraph {\n");
         out.push_str("graph [bgcolor=white, fontsize=11]; \n");
-
+        out.push_str("label=\"Transaction graph built from BDK wallet data. \n Pink nodes: external transactions \n Gray nodes: internal transactions \n Self loops: UTXOs \n \"; labelloc=\"t\"; \n");
         for node in &self.nodes {
             if node.external {
                 out.push_str(&format!(
