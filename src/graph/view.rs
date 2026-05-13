@@ -14,6 +14,9 @@ pub struct TxEdgeView {
     pub to: Txid,
     pub vout: u32,
     pub amnt: u64,
+    // An output owned by our wallet and sent to an external address
+    //  or and unspent transaction output in the non-canonical chain
+    pub external: bool,
 }
 
 /// A structure to enable graph visualization
@@ -23,4 +26,6 @@ pub struct TxNodeView {
     pub is_confirmed: bool,
     //  Transactions that we know of but don't exist in the graph
     pub external: bool,
+    // Transaction belongs to the canonical chain
+    pub canonical: bool,
 }

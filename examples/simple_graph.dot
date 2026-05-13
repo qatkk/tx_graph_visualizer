@@ -1,0 +1,27 @@
+Digraph txgraph {
+graph [bgcolor=white, fontsize=11]; 
+label="Transaction graph built from BDK wallet data
+            Pink Node: external transaction not included in the graph
+            Gray Node: non-canonical transactions
+            Green Node: confirmed canonical transactions 
+            Yellow Node: unconfirmed canonical transactions
+            Self loops (Black): UTXOs in the canonical chain
+            Self loops (Pink): External or internal non-canonical outputs 
+ "; 
+            labelloc="t"; 
+"719a5b03bd944a55ab6c0512e01eecf1fa298a276cfa4219f1b8632025c74857" [shape=box, color=yellow, style=filled, label="719a5b03..."];
+"9960f5de3ce42cf1ac81e17c7de6dba76131d7d0ef19bdf0869a75f76c17f4fe" [shape=box, color=yellow, style=filled, label="9960f5de..."];
+"8ab3b4549a6c291d9cb27538ae4cbcb300ae8d5c2bf93f950f046300dd24b00f" [shape=box, color=lightgray, style=filled, label="8ab3b454..."];
+"f2a03cdfe1bb6a295b0a4bb4385ca42f95e4b2c6d9a7a59355d32911f957a5b3" [shape=box, color=lightgreen, style=filled, label="f2a03cdf..."];
+"d10a99e3863b9b2f2e49785b58b1123c33aa73923628ef2b19c6d733d781b330" [shape=box, color=lightgreen, style=filled, label="d10a99e3..."];
+"8308ff64dae1f30cb90fc05ee0a9d05c995a10bdb210fed5a2311836c0920135" [shape=box, color=yellow, style=filled, label="8308ff64..."];
+"f2a03cdfe1bb6a295b0a4bb4385ca42f95e4b2c6d9a7a59355d32911f957a5b3" -> "719a5b03bd944a55ab6c0512e01eecf1fa298a276cfa4219f1b8632025c74857" [fontsize=10, label="vout:0, amnt: 50000"];
+"719a5b03bd944a55ab6c0512e01eecf1fa298a276cfa4219f1b8632025c74857" -> "9960f5de3ce42cf1ac81e17c7de6dba76131d7d0ef19bdf0869a75f76c17f4fe" [fontsize=10, label="vout:0, amnt: 40000"];
+"719a5b03bd944a55ab6c0512e01eecf1fa298a276cfa4219f1b8632025c74857" -> "8ab3b4549a6c291d9cb27538ae4cbcb300ae8d5c2bf93f950f046300dd24b00f" [fontsize=10, label="vout:0, amnt: 40000"];
+"d10a99e3863b9b2f2e49785b58b1123c33aa73923628ef2b19c6d733d781b330" -> "f2a03cdfe1bb6a295b0a4bb4385ca42f95e4b2c6d9a7a59355d32911f957a5b3" [fontsize=10, label="vout:0, amnt: 76000"];
+"719a5b03bd944a55ab6c0512e01eecf1fa298a276cfa4219f1b8632025c74857" -> "8308ff64dae1f30cb90fc05ee0a9d05c995a10bdb210fed5a2311836c0920135" [fontsize=10, label="vout:1, amnt: 5000"];
+"8308ff64dae1f30cb90fc05ee0a9d05c995a10bdb210fed5a2311836c0920135" -> "8308ff64dae1f30cb90fc05ee0a9d05c995a10bdb210fed5a2311836c0920135" [fontsize=10, label="vout:0, amnt: 5000"];
+"9960f5de3ce42cf1ac81e17c7de6dba76131d7d0ef19bdf0869a75f76c17f4fe" -> "9960f5de3ce42cf1ac81e17c7de6dba76131d7d0ef19bdf0869a75f76c17f4fe" [fontsize=10, label="vout:0, amnt: 35000"];
+"f2a03cdfe1bb6a295b0a4bb4385ca42f95e4b2c6d9a7a59355d32911f957a5b3" -> "f2a03cdfe1bb6a295b0a4bb4385ca42f95e4b2c6d9a7a59355d32911f957a5b3" [fontsize=10, color=lightpink, label="vout:1, amnt: 25000"];
+"8ab3b4549a6c291d9cb27538ae4cbcb300ae8d5c2bf93f950f046300dd24b00f" -> "8ab3b4549a6c291d9cb27538ae4cbcb300ae8d5c2bf93f950f046300dd24b00f" [fontsize=10, color=lightpink, label="vout:0, amnt: 30000"];
+}
