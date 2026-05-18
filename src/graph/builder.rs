@@ -1,10 +1,11 @@
 use crate::graph::view::{TxEdgeView, TxGraphView, TxNodeView};
-use bdk_chain::{CanonicalizationParams, ChainOracle, TxGraph};
+use bdk_chain::{CanonicalizationParams, ChainOracle};
 use bdk_wallet::Wallet;
 use bitcoin::{OutPoint, Txid};
 use std::collections::HashSet;
 
-pub fn build_view(tx_graph: &TxGraph, wallet: &Wallet) -> TxGraphView {
+pub fn build_view(wallet: &Wallet) -> TxGraphView {
+    let tx_graph = wallet.tx_graph();
     let mut nodes = Vec::new();
     let mut edges = Vec::new();
     let full_txs_vec = tx_graph.full_txs().collect::<Vec<_>>();

@@ -1,6 +1,9 @@
 use crate::graph::TxGraphView;
 use std::string::String;
 use std::string::ToString;
+use std::process::{Command, Stdio};
+use std::io::Write;
+use std::path::Path;
 
 impl TxGraphView {
     pub fn to_dot(&self) -> String {
@@ -65,5 +68,26 @@ impl TxGraphView {
         out.push_str("}\n");
 
         out
+    }
+    #[track_caller]
+    pub fn to_png(&self) -> Result<(), std::io::Error> {
+        let loc = std::panic::Location::caller();
+        let path = Path::new(loc.file())
+            .ancestors()
+            .next()
+            .unwrap()
+            .to_string_lossy()
+            .to_string();
+        let mut child = Command::new("dot")
+            .arg("-Tpng")
+            .stdin(Stdio::piped())
+            .arg("-o")
+            .arg(format!("{}{}", path.split_at(path.len()-3).0, "_graph.png"))
+            .spawn()?;
+        let _ = child.stdin
+            .as_mut()
+            .unwrap()
+            .write_all(self.to_dot().as_bytes());
+        Ok(())
     }
 }

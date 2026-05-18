@@ -1,7 +1,5 @@
-use bdk_wallet::KeychainKind;
+use bdk_wallet::{KeychainKind};
 use bitcoin::{Amount, OutPoint, Transaction, TxIn, TxOut, absolute, transaction};
-use std::fs;
-use std::process::Command;
 use tx_graph_visualizer::graph::build_view;
 use tx_graph_visualizer::test_utils::*;
 
@@ -103,13 +101,9 @@ fn main() {
 
     insert_tx(&mut wallet, tx_spend_conflict);
 
-    let tx_graph_vis = build_view(&wallet.tx_graph(), &wallet).to_dot();
-    fs::write("./examples/simple_graph.dot", tx_graph_vis).unwrap();
-    Command::new("dot")
-        .arg("-Tpng")
-        .arg("./examples/simple_graph.dot")
-        .arg("-o")
-        .arg("./examples/simple_graph.png")
-        .output()
-        .expect("Failed to execute dot command");
+    let tx_graph_vis = build_view(&wallet);
+    //  Export the graph to dot
+    tx_graph_vis.to_dot();
+    //  Export the graph to png, graphvis is required
+    tx_graph_vis.to_png().expect("png was not exported successfully!");
 }
